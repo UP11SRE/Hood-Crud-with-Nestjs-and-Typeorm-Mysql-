@@ -7,6 +7,7 @@ import { get } from 'http';
 import { Task, TaskStatus } from './task.module';
 import { Tasks } from 'src/tasks.entity';
 import { createTasksDto } from './create-tasks-dto';
+import { title } from 'process';
 
 // @Controller('tasks')
 // export class TasksController {
@@ -55,10 +56,10 @@ import { createTasksDto } from './create-tasks-dto';
       return this.tasksService.getAllTasks();
     }
   
-    //   @Get('/:id')
-    //   async getTaskById(@Param('id') id: string): Promise<Task> {
-    //     return this.tasksService.getTaskById(id);
-    //   }
+      @Get('/:id')
+      async getTaskById(@Param('id') id: string): Promise<void> {
+        return this.tasksService.getTaskById(id);
+      }
   
     @Post()
      createTask( @Body() dto : createTasksDto) {
@@ -74,11 +75,12 @@ import { createTasksDto } from './create-tasks-dto';
     }
   
 
-  // @Patch('/:id/status')
-  // async updateTaskStatus(
-  //   @Param('id') id: string,
-  //   @Body('status') status: TaskStatus,
-  // ): Promise<Task> {
-  //   return this.tasksService.updateTaskStatus(id, status);
-  // }
+  @Patch('/:id')
+  async updateTaskStatus(
+    @Param('id') id: string,
+    @Body('title') title: string , 
+    @Body('description') description: string 
+  ): Promise<Task> {
+    return this.tasksService.updateTaskStatus(id, title, description);
+  }
 }

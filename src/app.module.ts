@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TasksModule } from './tasks/tasks.module';
 import { Tasks } from './tasks.entity';
+import { redisModule } from './redis/redis.module';
 //import { RedisModule } from './redis.module';
 
 
@@ -17,7 +18,7 @@ import { Tasks } from './tasks.entity';
     TasksModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
+      imports: [ConfigModule, redisModule],
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: configService.get('DB_HOST'),

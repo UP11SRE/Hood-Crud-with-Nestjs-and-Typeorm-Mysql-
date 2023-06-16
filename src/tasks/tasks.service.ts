@@ -145,11 +145,17 @@ export class TasksService {
     //   throw new NotFoundException(`Task with ID "${id}" not found`);
     // }
 
-if(!data1){
+if(!data1 && !task){
   
     throw new NotFoundException(`Task with ID "${id}" not found`);
   
 }
+
+else if(!data1){
+
+  return task;
+}
+
 
 console.log(res);
 return res;

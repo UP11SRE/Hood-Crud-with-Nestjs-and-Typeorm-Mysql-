@@ -51,7 +51,7 @@ async login(dto : createUserDto) {
 
     }
 
-    return await this.generateToken(dto);
+    return  this.generateToken(dto);
 
 }
 

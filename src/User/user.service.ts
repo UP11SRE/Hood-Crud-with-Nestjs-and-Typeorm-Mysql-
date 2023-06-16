@@ -39,24 +39,25 @@ async userSignUp(dto : createUserDto){
 
     }    
 
-async login(dto : createUserDto){
+async login(dto : createUserDto) {
     
    const {email, password} = dto;
 
-    // const result = await this.userRepository.findOne()
+    const result = await this.userRepository.findOne({where : {email : email} })
 
-    // if(!result){
-    //     throw new NotFoundException('NOT FOUND');
+    if(!result){
+        throw new NotFoundException('NOT FOUND');
 
 
-    // }
+    }
 
+    return await this.generateToken(dto);
 
 }
 
 
 
-async generateToken(dto : createUserDto) {
+async generateToken(dto : createUserDto) : Promise<{access_token : string}> {
 
         const {email} = dto;
        const payload = {sub: email}

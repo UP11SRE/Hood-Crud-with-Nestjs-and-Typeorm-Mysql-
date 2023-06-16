@@ -116,9 +116,7 @@ export class TasksService {
       const task = await this.taskRepository.findOne({ where: { id: Number(id) } });
       // await this.redisClient.set('New_key', JSON.stringify(task));
 
-      if (!task) {
-        throw new NotFoundException(`Task with ID "${id}" not found`);
-      }
+      
 
       //const key = id.toString();
       //const data = await this.redisClient.get(key);
@@ -133,9 +131,30 @@ export class TasksService {
 
      const data1 = await this.redisClient.lindex('new_list',index);
 
-     console.log(data1);
+     const res = JSON.parse(data1);
+    //  let arr2 = []
+     //let arr = [{id:1},2,3,4,5,6,7]
+    //  data1.map(num => {
+    //   arr2.push(JSON.parse(num))
+    //  })
 
-      return task;
+    //  console.log(arr2);
+
+
+    //  if (!task) {
+    //   throw new NotFoundException(`Task with ID "${id}" not found`);
+    // }
+
+if(!data1){
+  
+    throw new NotFoundException(`Task with ID "${id}" not found`);
+  
+}
+
+console.log(res);
+return res;
+
+      // return task;
     }
 
   async createTask(dto: createTasksDto) {

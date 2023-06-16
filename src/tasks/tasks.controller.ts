@@ -61,7 +61,7 @@ import { Request, Response } from 'express';
     @UseGuards(JwtGuard)
       @Get('/:id')
       async getTaskById(@Req() request:Request,@Param('id') id: string): Promise<void> {
-        console.log("=====>",request,"_________________",request.user)
+       // console.log("=====>",request,"_________________",request.user)
         return this.tasksService.getTaskById(id);
       }
   
